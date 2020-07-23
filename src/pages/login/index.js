@@ -1,16 +1,14 @@
 import React, { Component } from "react";
+import Login from "./login";
 import "./login.less";
+import { Card } from "antd";
 
-export default class Login extends Component {
-  gotoHome = () => {
-    this.props.history.push("/home");
-  };
+export default class LoginCom extends Component {
   render() {
     return (
-      <div className="P-login">
-        <h1>Login page</h1>
-        <button onClick={this.gotoHome}>跳转Home页面</button>
-      </div>
+      <Card title="Cheat Room">
+        <Login></Login>
+      </Card>
     );
   }
 }
