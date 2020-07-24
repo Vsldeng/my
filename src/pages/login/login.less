@@ -5,9 +5,15 @@
 }
 .ant-card {
   width: 400px;
-  margin-left: -200px;
-  margin-top: -80px;
-  position: absolute;
-  z-index: 2000;
-  border: 1px solid #006699;
+}
+.loginContainer {
+  background-image: url(../../common/images/bg.png);
+  height: 100%;
+  position: relative;
+  .ant-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
