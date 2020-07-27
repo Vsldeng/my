@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import "./home.less";
 import Header from "../../components/header";
 import routerDefine from "../../common/js/routerDefine";
+import Home from "./home";
 
-export default class Home extends Component {
+export default class HomeCom extends Component {
   componentDidMount() {
     routerDefine(this.props);
   }
@@ -14,9 +15,8 @@ export default class Home extends Component {
   render() {
     return (
       <div className="P-home">
-        <Header></Header>
-        <h1>Home page</h1>
-        <button onClick={this.handleLogout}>退出</button>
+        <Header logOut={this.handleLogout}></Header>
+        <Home></Home>
       </div>
     );
   }

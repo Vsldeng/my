@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { Form, Input, Button, message, Card } from "antd";
 import "./login.less";
 import API from "../../services/http.base";
-
+import axios from "axios";
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userName: null,
-      password: null,
+      passWord: null,
       title: "登录",
       newUserInfo: {
         phone: null,
         userName: null,
-        password: null,
+        passWord: null,
       },
     };
   }
@@ -23,7 +23,7 @@ export default class Login extends Component {
       newUserInfo: {
         phone: e.target.value,
         userName: this.state.newUserInfo.userName,
-        password: this.state.newUserInfo.password,
+        passWord: this.state.newUserInfo.password,
       },
     });
   };
@@ -37,7 +37,7 @@ export default class Login extends Component {
       this.setState({
         newUserInfo: {
           userName: e.target.value,
-          password: this.state.newUserInfo.password,
+          passWord: this.state.newUserInfo.password,
           phone: this.state.newUserInfo.phone,
         },
       });
@@ -47,12 +47,12 @@ export default class Login extends Component {
   handlePassword = (e) => {
     if (this.state.title === "登录") {
       this.setState({
-        password: e.target.value,
+        passWord: e.target.value,
       });
     } else {
       this.setState({
         newUserInfo: {
-          password: e.target.value,
+          passWord: e.target.value,
           phone: this.state.newUserInfo.phone,
           userName: this.state.newUserInfo.userName,
         },
@@ -61,18 +61,22 @@ export default class Login extends Component {
   };
   //处理登录调取后台接口校验用户名和密码
   handleLogin = async () => {
+    const username = this.state.userName;
+    const password = this.state.passWord;
     if (this.state.title === "登录") {
-      let data = await API.get("/user/login");
+      console.log(this.state.userName, this.state.passWord);
+      let data = await API.post("mock.php", username, password);
+      // let data = await API.post("/user/hello");
       console.log(data);
       if (data.status === 200) {
         message.success("登录成功");
         window.sessionStorage.setItem("token", data.data.token);
         this.props.history.push("/home");
-      } else if (data.status === 1001) {
+      } else if (data.code === 1001) {
         message.error("用户名或密码错误");
         return;
-      } else if (data.status === 1002) {
-        message.error("用户不存在");
+      } else if (data.status === 400) {
+        message.error("没有该权限");
         return;
       }
     } else {
