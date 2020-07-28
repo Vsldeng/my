@@ -9,39 +9,33 @@ export default class Home extends Component {
     return (
       <div className="home-List">
         <Menu
-          onClick={this.handleClick}
+          onClick={(this.handleClick, this.props.handlePageChange)}
           style={{
             width: this.props.isCollapse ? "0px" : "264px",
           }}
-          defaultOpenKeys={["sub2", "sub4"]}
-          defaultSelectedKeys={["5"]}
+          defaultOpenKeys={["sub1", "sub2"]}
+          defaultSelectedKeys={["1"]}
           mode="inline"
         >
           <SubMenu
-            key="sub2"
+            key="sub1"
             icon={<CommentOutlined />}
             title="聊天室"
             style={{ display: this.props.isCollapse ? "none" : "block" }}
           >
-            <Menu.Item key="5" onClick={this.props.handlePageChange}>
-              大厅
-            </Menu.Item>
-            <Menu.Item key="6">个人房间</Menu.Item>
+            <Menu.Item key="1">大厅</Menu.Item>
+            <Menu.Item key="2">个人房间</Menu.Item>
           </SubMenu>
           <SubMenu
             style={{ display: this.props.isCollapse ? "none" : "block" }}
-            key="sub4"
-            title={
-              <span>
-                <GlobalOutlined />
-                <span>社交</span>
-              </span>
-            }
+            key="sub2"
+            icon={<GlobalOutlined />}
+            title="社交"
           >
-            <Menu.Item key="9">聊一圈</Menu.Item>
-            <Menu.Item key="10">聊友列表</Menu.Item>
-            <Menu.Item key="11">特别关心</Menu.Item>
-            <Menu.Item key="12">黑名单</Menu.Item>
+            <Menu.Item key="3">聊一圈</Menu.Item>
+            <Menu.Item key="4">聊友列表</Menu.Item>
+            <Menu.Item key="5">特别关心</Menu.Item>
+            <Menu.Item key="6">黑名单</Menu.Item>
           </SubMenu>
         </Menu>
       </div>

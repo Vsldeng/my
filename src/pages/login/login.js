@@ -67,16 +67,13 @@ export default class Login extends Component {
     let a = JSON.stringify({ username: username, password: password });
     if (this.state.title === "登录") {
       console.log(this.state.userName, a);
-      let data = await API.post("/user/login", {
-        username: username,
-        password: password,
-      });
-      // let data = await API.post("/user/login?ds=caj");
+      // let data = await API.post("mock.php", a);
+      let data = await API.post("/user/login", a);
       console.log(data);
       if (data.status === 200) {
         message.success("登录成功");
         window.sessionStorage.setItem("token", data.data.token);
-        this.props.history.push("/home");
+        this.props.history.push("/home/1");
       } else if (data.code === 1001) {
         message.error("用户名或密码错误");
         return;

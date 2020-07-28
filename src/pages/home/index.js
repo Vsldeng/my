@@ -4,8 +4,12 @@ import Header from "../../components/header";
 import routerDefine from "../../common/js/routerDefine";
 import Home from "./home";
 import { HashRouter, Route, Redirect } from "react-router-dom";
-import { Switch } from "antd";
-import Login from "../login/login";
+import Hall from "../../components/hall";
+import PrivateRoom from "../../components/privateRoom";
+import CheatCircle from "../../components/cheatCircle";
+import CheatList from "../../components/cheatList";
+import SpecialConnect from "../../components/specialConnect";
+import BlackList from "../../components/blackList";
 
 export default class HomeCom extends Component {
   constructor(props) {
@@ -26,8 +30,8 @@ export default class HomeCom extends Component {
     window.sessionStorage.clear();
     this.props.history.push("/login");
   };
-  handlePageChange = () => {
-    this.props.history.push("/login");
+  handlePageChange = (e) => {
+    this.props.history.push(`/home/${e.key}`);
   };
   render() {
     return (
@@ -40,6 +44,14 @@ export default class HomeCom extends Component {
           logOut={this.handleLogout}
           handleCollapse={this.handleCollapse}
         ></Header>
+        <HashRouter>
+          <Route path="/home/1" component={Hall} />
+          <Route path="/home/2" component={PrivateRoom} />
+          <Route path="/home/3" component={CheatCircle} />
+          <Route path="/home/4" component={CheatList} />
+          <Route path="/home/5" component={SpecialConnect} />
+          <Route path="/home/6" component={BlackList} />
+        </HashRouter>
       </div>
     );
   }
