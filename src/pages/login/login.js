@@ -3,6 +3,7 @@ import { Form, Input, Button, message, Card } from "antd";
 import "./login.less";
 import API from "../../services/http.base";
 import axios from "axios";
+import Password from "antd/lib/input/Password";
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -63,10 +64,14 @@ export default class Login extends Component {
   handleLogin = async () => {
     const username = this.state.userName;
     const password = this.state.passWord;
+    let a = JSON.stringify({ username: username, password: password });
     if (this.state.title === "登录") {
-      console.log(this.state.userName, this.state.passWord);
-      let data = await API.post("mock.php", username, password);
-      // let data = await API.post("/user/hello");
+      console.log(this.state.userName, a);
+      let data = await API.post("/user/login", {
+        username: username,
+        password: password,
+      });
+      // let data = await API.post("/user/login?ds=caj");
       console.log(data);
       if (data.status === 200) {
         message.success("登录成功");

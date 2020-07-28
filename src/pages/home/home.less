@@ -9,8 +9,17 @@
   }
 }
 .home-List {
+  z-index: 10000px;
+  float: left;
   height: 100%;
   .ant-menu-light {
     height: 100%;
+  }
+}
+.ant-menu-item-only-child {
+  &:hover {
+    box-shadow: 5px 5px 5px #f8e0e0;
+    background-color: #d2d1fd1f;
+    transition: 0.5s;
   }
 }

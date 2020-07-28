@@ -10,16 +10,26 @@ export default class Home extends Component {
       <div className="home-List">
         <Menu
           onClick={this.handleClick}
-          style={{ width: 256 }}
+          style={{
+            width: this.props.isCollapse ? "0px" : "264px",
+          }}
           defaultOpenKeys={["sub2", "sub4"]}
+          defaultSelectedKeys={["5"]}
           mode="inline"
         >
-          <SubMenu key="sub2" icon={<CommentOutlined />} title="聊天室">
-            <Menu.Item key="4">创建房间</Menu.Item>
-            <Menu.Item key="5">大厅</Menu.Item>
+          <SubMenu
+            key="sub2"
+            icon={<CommentOutlined />}
+            title="聊天室"
+            style={{ display: this.props.isCollapse ? "none" : "block" }}
+          >
+            <Menu.Item key="5" onClick={this.props.handlePageChange}>
+              大厅
+            </Menu.Item>
             <Menu.Item key="6">个人房间</Menu.Item>
           </SubMenu>
           <SubMenu
+            style={{ display: this.props.isCollapse ? "none" : "block" }}
             key="sub4"
             title={
               <span>
