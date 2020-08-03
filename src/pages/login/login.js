@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Form, Input, Button, message, Card } from "antd";
 import "./login.less";
 import API from "../../services/http.base";
-import axios from "axios";
-import Password from "antd/lib/input/Password";
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -64,13 +62,16 @@ export default class Login extends Component {
   handleLogin = async () => {
     const username = this.state.userName;
     const password = this.state.passWord;
-    let a = JSON.stringify({ username: username, password: password });
+    // let a = JSON.stringify({ username: username, password: password });
     if (this.state.title === "登录") {
-      console.log(this.state.userName, a);
       // let data = await API.post("mock.php", a);
-      let data = await API.post("/user/login", a);
+      let data = await API.post("/user/login1", {
+        username: username,
+        password: password,
+      });
+      data = data.data;
       console.log(data);
-      if (data.status === 200) {
+      if (data.code === 200) {
         message.success("登录成功");
         window.sessionStorage.setItem("token", data.data.token);
         this.props.history.push("/home/1");
